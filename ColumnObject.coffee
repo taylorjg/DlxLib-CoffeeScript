@@ -2,25 +2,25 @@
 
 	constructor: ->
 		super null, -1
-		@previousColumnObject = this
-		@nextColumnObject = this
+		@previousListHeader = this
+		@nextListHeader = this
 		@numberOfRows = 0
 
-	appendColumnHeader: (columnObject) ->
-		@previousColumnObject.nextColumnObject = columnObject
-		columnObject.nextColumnObject = this
-		columnObject.previousColumnObject = @previousColumnObject
-		@previousColumnObject = columnObject
+	appendListHeader: (listHeader) ->
+		@previousListHeader.nextListHeader = listHeader
+		listHeader.nextListHeader = this
+		listHeader.previousListHeader = @previousListHeader
+		@previousListHeader = listHeader
 		return
 
-	unlinkColumnHeader: ->
-		@nextColumnObject.previousColumnObject = @previousColumnObject
-		@previousColumnObject.nextColumnObject = @nextColumnObject
+	unlinkListHeader: ->
+		@nextListHeader.previousListHeader = @previousListHeader
+		@previousListHeader.nextListHeader = @nextListHeader
 		return
 
-	relinkColumnHeader: ->
-		@nextColumnObject.previousColumnObject = this
-		@previousColumnObject.nextColumnObject = this
+	relinkListHeader: ->
+		@nextListHeader.previousListHeader = this
+		@previousListHeader.nextListHeader = this
 		return
 
 	addDataObject: (dataObject) ->

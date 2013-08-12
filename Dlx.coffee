@@ -24,7 +24,7 @@
 		for colIndex in [0...numCols]
 			do (colIndex) ->
 				listHeader = new ColumnObject
-				_root.appendColumnHeader listHeader
+				_root.appendListHeader listHeader
 				colIndexToListHeader[colIndex] = listHeader
 				return
 
@@ -81,22 +81,22 @@
 		return
 
 	_matrixIsEmpty = ->
-		_root.nextColumnObject is _root
+		_root.nextListHeader is _root
 
 	_getListHeaderOfColumnWithLeastRows = ->
-		listHeader = null
+		result = null
 		smallestNumberOfRows = Number.MAX_VALUE
-		columnHeader = _root.nextColumnObject
+		listHeader = _root.nextListHeader
 		loop
-			break if columnHeader is _root
-			if columnHeader.numberOfRows < smallestNumberOfRows
-				listHeader = columnHeader
-				smallestNumberOfRows = columnHeader.numberOfRows
-			columnHeader = columnHeader.nextColumnObject
-		listHeader
+			break if listHeader is _root
+			if listHeader.numberOfRows < smallestNumberOfRows
+				result = listHeader
+				smallestNumberOfRows = listHeader.numberOfRows
+			listHeader = listHeader.nextListHeader
+		result
 
 	_coverColumn = (c) ->
-		c.unlinkColumnHeader()
+		c.unlinkListHeader()
 		i = c.down
 		loop
 			break if i is c
@@ -118,5 +118,5 @@
 				j.listHeader.relinkDataObject j
 				j = j.left
 			i = i.up
-		c.relinkColumnHeader()
+		c.relinkListHeader()
 		return
