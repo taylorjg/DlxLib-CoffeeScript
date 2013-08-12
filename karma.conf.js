@@ -16,7 +16,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-		"DlxLib.coffee",
+		"DataObject.coffee",
+		"ColumnObject.coffee",
+		"Solution.coffee",
+		"Dlx.coffee",
 		"DlxLibSpec.coffee"
     ],
 
