@@ -1,8 +1,7 @@
 ﻿# TODO
 # - checks re the validity of the matrix
-# - rowIndexes in solutions should be ordering by ascending value
-# - the loops over the doubly linked lists are not nice - how can we use comprehensions instead ?
 # - split into separate files - DataObject.coffee, ColumnObject.coffee, Dlx.coffee, Solution.coffee
+# - the loops over the doubly linked lists are not nice - how can we use comprehensions instead ?
 # - presumably, as written, two instances are not independent because of _root, _solutions and _currentSolution ?
 
 class DataObject
@@ -83,9 +82,7 @@ class ColumnObject extends DataObject
 class Solution
 
 	constructor: (rowIndexes) ->
-		copyOfRowIndexes = (rowIndex for rowIndex in rowIndexes)
-		# TODO: order by ascending rowIndex value...
-		@rowIndexes = copyOfRowIndexes
+		@rowIndexes = (rowIndex for rowIndex in rowIndexes).sort (a, b) -> a - b
 
 class Dlx
 
