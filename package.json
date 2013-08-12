@@ -1,0 +1,28 @@
+{
+  "name": "DlxLib-CoffeeScript",
+  "version": "0.0.0",
+  "description": "CoffeeScript version of my DlxLib - ported from C#",
+  "main": "DlxLib.coffee",
+  "dependencies": {
+    "karma": "~0.10.1",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-jasmine": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma-requirejs": "~0.1.0",
+    "karma-script-launcher": "~0.1.0",
+    "karma-spec-reporter": "~0.0.3",
+    "phantomjs": "~1.9.1-0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taylorjg/DlxLib-CoffeeScript.git"
+  },
+  "author": "Jonathan Taylor"
+}

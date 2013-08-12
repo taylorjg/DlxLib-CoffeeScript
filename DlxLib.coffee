@@ -86,6 +86,11 @@ class Solution
 
 class Dlx
 
+	solve: (matrix) ->
+		_buildInternalStructure matrix
+		_search()
+		_solutions
+		
 	_root = null
 	_solutions = []
 	_currentSolution = []
@@ -114,7 +119,7 @@ class Dlx
 				firstDataObjectInThisRow = null
 				for colIndex in [0...numCols]
 					do (colIndex) ->
-						return if matrix[rowIndex][colIndex] is 0
+						return if !matrix[rowIndex][colIndex]
 						listHeader = colIndexToListHeader[colIndex]
 						dataObject = new DataObject listHeader, rowIndex
 						if firstDataObjectInThisRow?
@@ -201,8 +206,3 @@ class Dlx
 			i = i.up
 		c.relinkColumnHeader()
 		return
-		
-	solve: (matrix) ->
-		_buildInternalStructure matrix
-		_search()
-		_solutions
