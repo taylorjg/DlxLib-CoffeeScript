@@ -1,5 +1,5 @@
-﻿DataObjectModule = require "./DataObject"
-DataObject = DataObjectModule.DataObject
+﻿if module?
+	DataObject = require "./DataObject"
 
 class ColumnObject extends DataObject
 
@@ -41,4 +41,5 @@ class ColumnObject extends DataObject
 		@numberOfRows++
 		return
 
-(exports ? this).ColumnObject = ColumnObject
+if module?
+	module.exports = ColumnObject

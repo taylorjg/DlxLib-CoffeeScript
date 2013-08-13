@@ -1,10 +1,17 @@
 ﻿describe "Tests for DlxLib-CoffeeScript", ->
 
-	#it "null matrix throws an error", ->
-	#
+	it "null matrix throws an error", ->
+		dlx = new Dlx
+		expect(-> dlx.solve null).toThrow new Error "invalid matrix - null"
 	
-	#it "matrix with rows of different lengths throws an error", ->
-	#	
+	it "matrix with rows of different lengths throws an error", ->
+		matrix = [
+			[1, 0, 0]
+			[0, 1, 0]
+			[0, 0]
+		]
+		dlx = new Dlx
+		expect(-> dlx.solve matrix).toThrow new Error "invalid matrix - rows have differing lengths"
 
 	it "empty matrix returns no solutions", ->
 		matrix = []

@@ -1,10 +1,7 @@
-﻿DataObjectModule	= require "./DataObject"
-ColumnObjectModule	= require "./ColumnObject"
-SolutionModule		= require "./Solution"
-
-DataObject		= DataObjectModule.DataObject
-ColumnObject	= ColumnObjectModule.ColumnObject
-Solution		= SolutionModule.Solution
+﻿if module?
+	DataObject		= require "./DataObject"
+	ColumnObject	= require "./ColumnObject"
+	Solution		= require "./Solution"
 
 class Dlx
 
@@ -19,14 +16,21 @@ class Dlx
 
 	_buildInternalStructure = (matrix) ->
 	
-		# TODO: add checks to ensure that matrix is valid...
-		
+		if matrix is null
+			throw new Error "invalid matrix - null"
+	
 		_root = new ColumnObject
 		_solutions = []
 		_currentSolution = []
 		
 		numRows = matrix.length
 		numCols = if numRows > 0 then matrix[0].length else 0
+		
+		for rowIndex in [0...numRows]
+			do (rowIndex) ->
+				if matrix[rowIndex].length isnt numCols
+					throw new Error "invalid matrix - rows have differing lengths"
+
 		colIndexToListHeader = {}
 		
 		for colIndex in [0...numCols]
@@ -129,4 +133,5 @@ class Dlx
 		c.relinkListHeader()
 		return
 
-(exports ? this).Dlx = Dlx
+if module?
+	module.exports = Dlx

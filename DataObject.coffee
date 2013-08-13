@@ -33,4 +33,5 @@
 		@up.down = this
 		return
 
-(exports ? this).DataObject = DataObject
+if module?
+	module.exports = DataObject
