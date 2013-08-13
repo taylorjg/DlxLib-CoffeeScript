@@ -1,7 +1,7 @@
 ﻿if module?
-	DataObject		= require "./DataObject"
-	ColumnObject	= require "./ColumnObject"
-	Solution		= require "./Solution"
+	DataObject = require "./DataObject"
+	ColumnObject = require "./ColumnObject"
+	Solution = require "./Solution"
 
 class Dlx
 
