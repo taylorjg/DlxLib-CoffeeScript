@@ -1,4 +1,12 @@
-﻿class Dlx
+﻿DataObjectModule	= require "./DataObject"
+ColumnObjectModule	= require "./ColumnObject"
+SolutionModule		= require "./Solution"
+
+DataObject		= DataObjectModule.DataObject
+ColumnObject	= ColumnObjectModule.ColumnObject
+Solution		= SolutionModule.Solution
+
+class Dlx
 
 	solve: (matrix) ->
 		_buildInternalStructure matrix
@@ -120,3 +128,5 @@
 			i = i.up
 		c.relinkListHeader()
 		return
+
+(exports ? this).Dlx = Dlx

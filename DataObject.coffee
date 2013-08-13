@@ -32,3 +32,5 @@
 		@down.up = this
 		@up.down = this
 		return
+
+(exports ? this).DataObject = DataObject

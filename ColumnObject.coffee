@@ -1,4 +1,7 @@
-﻿class ColumnObject extends DataObject
+﻿DataObjectModule = require "./DataObject"
+DataObject = DataObjectModule.DataObject
+
+class ColumnObject extends DataObject
 
 	constructor: ->
 		super null, -1
@@ -37,3 +40,5 @@
 		dataObject.relinkIntoColumn()
 		@numberOfRows++
 		return
+
+(exports ? this).ColumnObject = ColumnObject
