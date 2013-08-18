@@ -14,32 +14,33 @@ class ColumnObject extends DataObject
 		listHeader.nextListHeader = this
 		listHeader.previousListHeader = @previousListHeader
 		@previousListHeader = listHeader
-		return
 
 	unlinkListHeader: ->
 		@nextListHeader.previousListHeader = @previousListHeader
 		@previousListHeader.nextListHeader = @nextListHeader
-		return
 
 	relinkListHeader: ->
 		@nextListHeader.previousListHeader = this
 		@previousListHeader.nextListHeader = this
-		return
 
 	addDataObject: (dataObject) ->
 		@appendToColumn dataObject
 		@numberOfRows++
-		return
 		
 	unlinkDataObject: (dataObject) ->
 		dataObject.unlinkFromColumn()
 		@numberOfRows--
-		return
 		
 	relinkDataObject: (dataObject) ->
 		dataObject.relinkIntoColumn()
 		@numberOfRows++
-		return
+		
+	loopNext: (fn) ->
+		next = @nextListHeader
+		loop
+			break if next is this
+			fn next
+			next = next.nextListHeader
 
 if module?
 	module.exports = ColumnObject

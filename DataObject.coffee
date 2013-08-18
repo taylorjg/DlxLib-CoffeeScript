@@ -14,24 +14,51 @@
 		dataObject.right = this
 		dataObject.left = @left
 		@left = dataObject
-		return
 
 	appendToColumn: (dataObject) ->
 		@up.down = dataObject
 		dataObject.down = this
 		dataObject.up = @up
 		@up = dataObject
-		return
 
 	unlinkFromColumn: ->
 		@down.up = @up
 		@up.down = @down
-		return
 
 	relinkIntoColumn: ->
 		@down.up = this
 		@up.down = this
-		return
+		
+	loopUp: (fn) ->
+		@_loop(
+			(dataObject) -> dataObject.up
+			fn
+		)
+
+	loopDown: (fn) ->
+		@_loop(
+			(dataObject) -> dataObject.down
+			fn
+		)
+		
+	loopLeft: (fn) ->
+		@_loop(
+			(dataObject) -> dataObject.left
+			fn
+		)
+		
+	loopRight: (fn) ->
+		@_loop(
+			(dataObject) -> dataObject.right
+			fn
+		)
+		
+	_loop: (getNext, fn) ->
+		next = getNext this
+		loop
+			break if next is this
+			fn next
+			next = getNext next
 
 if module?
 	module.exports = DataObject

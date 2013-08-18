@@ -54,8 +54,6 @@ class Dlx
 							firstDataObjectInThisRow = dataObject
 						return
 				return
-			
-		return
 
 	_search = ->
 	
@@ -64,33 +62,17 @@ class Dlx
 			return
 
 		c = _getListHeaderOfColumnWithLeastRows()
+		
 		_coverColumn c
 		
-		r = c.down
-		loop
-			break if r is c
+		c.loopDown (r) ->
 			_currentSolution.push r.rowIndex
-			j = r.right
-			loop
-				break if j is r
-				_coverColumn j.listHeader
-				j = j.right
-				
+			r.loopRight (j) -> _coverColumn j.listHeader
 			_search()
-			
-			j = r.left
-			loop
-				break if j is r
-				_uncoverColumn j.listHeader
-				j = j.left
-				
+			r.loopLeft (j) -> _uncoverColumn j.listHeader
 			_currentSolution.pop()
 			
-			r = r.down
-		
 		_uncoverColumn c
-			
-		return
 
 	_matrixIsEmpty = ->
 		_root.nextListHeader is _root
@@ -98,40 +80,19 @@ class Dlx
 	_getListHeaderOfColumnWithLeastRows = ->
 		result = null
 		smallestNumberOfRows = Number.MAX_VALUE
-		listHeader = _root.nextListHeader
-		loop
-			break if listHeader is _root
+		_root.loopNext (listHeader) ->
 			if listHeader.numberOfRows < smallestNumberOfRows
 				result = listHeader
 				smallestNumberOfRows = listHeader.numberOfRows
-			listHeader = listHeader.nextListHeader
 		result
 
 	_coverColumn = (c) ->
 		c.unlinkListHeader()
-		i = c.down
-		loop
-			break if i is c
-			j = i.right
-			loop
-				break if j is i
-				j.listHeader.unlinkDataObject j
-				j = j.right
-			i = i.down
-		return
+		c.loopDown (i) -> i.loopRight (j) -> j.listHeader.unlinkDataObject j
 
 	_uncoverColumn = (c) ->
-		i = c.up
-		loop
-			break if i is c
-			j = i.left
-			loop
-				break if j is i
-				j.listHeader.relinkDataObject j
-				j = j.left
-			i = i.up
+		c.loopUp (i) -> i.loopLeft (j) -> j.listHeader.relinkDataObject j
 		c.relinkListHeader()
-		return
 
 if module?
 	module.exports = Dlx
